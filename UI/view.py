@@ -15,6 +15,8 @@ class View:
         self.page.horizontal_alignment = "center"
         self.page.theme_mode = ft.ThemeMode.DARK
 
+        self.dd_biblioteche = None
+
         # Alert
         self.alert = AlertManager(page)
 
@@ -36,7 +38,9 @@ class View:
         self.txt_titolo = ft.Text(value="Biblioteche di Torino", size=38, weight=ft.FontWeight.BOLD)
 
         # --- Sezione 2: Filtraggio ---
-        # TODO
+        ft.Divider()
+        self.dd_biblioteche = ft.Dropdown(label="Biblioteca")
+
 
         # Sezione 3: Libri
         # TODO
@@ -53,7 +57,7 @@ class View:
             ft.Divider(),
 
             # Sezione 2: Filtraggio
-            # TODO
+            self.dd_biblioteche,
 
             # Sezione 3: Libri
             # TODO

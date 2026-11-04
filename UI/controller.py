@@ -18,7 +18,16 @@ class Controller:
         self.genere_selezionato = None
 
     # POPOLA DROPDOWN
-    # TODO
+    def popola_dd(self):
+        biblioteche=self._model.get_biblioteche()
+
+        self._view.dd_biblioteche.options.append(ft.dropdown.Option(text="Nessun filtro"))
+
+        for biblioteca in biblioteche:
+            self._view.dd_biblioteche.options.append(ft.dropdown.Option(text=biblioteca))
+
+        self._view.update()
+
 
     # CALLBACKS DROPDOWN
     # TODO

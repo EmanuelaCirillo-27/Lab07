@@ -18,19 +18,40 @@ class Controller:
         self.genere_selezionato = None
 
     # POPOLA DROPDOWN
-    def popola_dd(self):
+    def popola_dd_biblioteche(self):
         biblioteche=self._model.get_biblioteche()
 
         self._view.dd_biblioteche.options.append(ft.dropdown.Option(text="Nessun filtro"))
 
         for biblioteca in biblioteche:
-            self._view.dd_biblioteche.options.append(ft.dropdown.Option(text=biblioteca))
+            biblioteca_nome=biblioteca.nome
+            self._view.dd_biblioteche.options.append(ft.dropdown.Option(text=biblioteca_nome))
+
+        self._view.update()
+
+    def popola_dd_generi(self):
+        generi=self._model.get_generi()
+
+        self._view.dd_generi.options.append(ft.dropdown.Option(text="Nessun filtro"))
+
+        for genere in generi:
+            self._view.dd_generi.options.append(ft.dropdown.Option(text=genere))
 
         self._view.update()
 
 
     # CALLBACKS DROPDOWN
-    # TODO
+    # Qui metto le funzioni che si eseguono in automatico quando l'utente seleziona dalla dropdown (on_select)
+    # Quindi si salvano la scelta dell'utente
+
+    def get_biblioteca(self,e):
+        self.biblioteca_selezionata=self._view.dd_biblioteche.value
+        print(f"Biblioteca selezionata: {self.biblioteca_selezionata}")
+
+    def get_genere(self,e):
+        self.genere_selezionato=self._view.dd_generi.value
+        print(f"Genere selezionato: {self.genere_selezionato}")
 
     # AZIONE: MOSTRA LIBRI
     # TODO
+    # Qui metto la funzione legata al pulsante che cerca i libri

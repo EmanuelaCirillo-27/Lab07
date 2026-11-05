@@ -12,12 +12,13 @@ class BibliotecaDAO:
 
     def leggi_biblioteche_dal_db(self):
 
-        db=DBConnect()
-        cnx=db.get_connection()
+        #db=DBConnect()
+        #cnx=db.get_connection()
+        cnx= DBConnect.get_connection()
 
         if cnx is not None:
 
-            query=""" SELECT nome
+            query=""" SELECT *
                         FROM biblioteca"""
 
             cursor=cnx.cursor()

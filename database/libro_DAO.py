@@ -10,4 +10,24 @@ class LibroDAO:
     def __init__(self):
         pass
 
-    # TODO
+    def leggi_libri_dal_db(self):
+
+        cnx = DBConnect.get_connection()
+
+        if cnx is not None:
+
+            query=""" SELECT *
+                    FROM libro"""
+
+            cursor = cnx.cursor()
+            cursor.execute(query)
+
+            libri=[]
+            for row in cursor:
+                libro=Libro(*row)
+                libri.append(libro)
+
+            cursor.close()
+            cnx.close()
+
+            return libri

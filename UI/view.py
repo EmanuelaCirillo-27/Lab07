@@ -16,6 +16,7 @@ class View:
         self.page.theme_mode = ft.ThemeMode.DARK
 
         self.dd_biblioteche = None
+        self.dd_generi = None
 
         # Alert
         self.alert = AlertManager(page)
@@ -39,7 +40,13 @@ class View:
 
         # --- Sezione 2: Filtraggio ---
         ft.Divider()
-        self.dd_biblioteche = ft.Dropdown(label="Biblioteca")
+        self.dd_biblioteche = ft.Dropdown(label="Biblioteca", on_select=self.controller.get_biblioteca)
+        if self.controller is not None:
+            self.controller.popola_dd_biblioteche()
+
+        self.dd_generi = ft.Dropdown(label="Generi", on_select=self.controller.get_genere)
+        if self.controller is not None:
+            self.controller.popola_dd_generi()
 
 
         # Sezione 3: Libri
@@ -57,7 +64,7 @@ class View:
             ft.Divider(),
 
             # Sezione 2: Filtraggio
-            self.dd_biblioteche,
+            ft.Row(spacing=50, controls=[self.dd_biblioteche, self.dd_generi], alignment=ft.MainAxisAlignment.CENTER),
 
             # Sezione 3: Libri
             # TODO

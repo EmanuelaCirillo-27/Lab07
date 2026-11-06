@@ -46,12 +46,34 @@ class Controller:
 
     def get_biblioteca(self,e):
         self.biblioteca_selezionata=self._view.dd_biblioteche.value
+        if self.biblioteca_selezionata=="Nessun filtro" or self.biblioteca_selezionata=="":
+            self.biblioteca_selezionata = None
+
         print(f"Biblioteca selezionata: {self.biblioteca_selezionata}")
 
     def get_genere(self,e):
         self.genere_selezionato=self._view.dd_generi.value
+        if self.genere_selezionato=="Nessun filtro" or self.genere_selezionato=="":
+            self.genere_selezionato = None
+
         print(f"Genere selezionato: {self.genere_selezionato}")
 
     # AZIONE: MOSTRA LIBRI
-    # TODO
     # Qui metto la funzione legata al pulsante che cerca i libri
+
+    def handler_filtro(self):
+
+        genere=self.genere_selezionato
+        biblioteca=self.biblioteca_selezionata
+        libri_filtrati=self._model.get_libri_filtrati(biblioteca,genere)
+
+        self._view.lista_libri_filtrati.controls.clear()
+
+        if libri_filtrati:
+            for el in libri_filtrati:
+                libro_in_testo=ft.Text(str(el))
+                self._view.lista_libri_filtrati.controls.append(libro_in_testo)
+        else:
+            self._view.show_alert("Nessun libro soddisfa i criteri di filtraggio")
+
+        self._view.update()

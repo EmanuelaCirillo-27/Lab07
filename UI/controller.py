@@ -18,6 +18,7 @@ class Controller:
         self.genere_selezionato = None
 
     # POPOLA DROPDOWN
+    # Funzione che prende la lista di biblioteche dal model e popola la dropdown con tutti i nomi in lista
     def popola_dd_biblioteche(self):
         biblioteche=self._model.get_biblioteche()
 
@@ -29,6 +30,7 @@ class Controller:
 
         self._view.update()
 
+    # Funzione che prende la lista di generi dal model e popola la dropdown con tutti i nomi in lista
     def popola_dd_generi(self):
         generi=self._model.get_generi()
 
@@ -42,21 +44,21 @@ class Controller:
 
     # CALLBACKS DROPDOWN
     # Qui metto le funzioni che si eseguono in automatico quando l'utente seleziona dalla dropdown (on_select)
-    # Quindi si salvano la scelta dell'utente
+    # Quindi si salvano le scelte dell'utente (prese dalla view), gestendo anche il caso "Nessun filtro"
 
     def get_biblioteca(self,e):
         self.biblioteca_selezionata=self._view.dd_biblioteche.value
         if self.biblioteca_selezionata=="Nessun filtro" or self.biblioteca_selezionata=="":
             self.biblioteca_selezionata = None
 
-        print(f"Biblioteca selezionata: {self.biblioteca_selezionata}")
+        #print(f"Biblioteca selezionata: {self.biblioteca_selezionata}")
 
     def get_genere(self,e):
         self.genere_selezionato=self._view.dd_generi.value
         if self.genere_selezionato=="Nessun filtro" or self.genere_selezionato=="":
             self.genere_selezionato = None
 
-        print(f"Genere selezionato: {self.genere_selezionato}")
+        #print(f"Genere selezionato: {self.genere_selezionato}")
 
     # AZIONE: MOSTRA LIBRI
     # Qui metto la funzione legata al pulsante che cerca i libri
@@ -65,15 +67,18 @@ class Controller:
 
         genere=self.genere_selezionato
         biblioteca=self.biblioteca_selezionata
-        libri_filtrati=self._model.get_libri_filtrati(biblioteca,genere)
+        libri_filtrati=self._model.get_libri_filtrati(biblioteca,genere) # Passo alla funzione nel model biblioteca
+                                                                        # e genere dati dall'utente
 
         self._view.lista_libri_filtrati.controls.clear()
 
+        # Se la lista dei libri filtrati non è vuota, trasformo in testo ogni riga e la aggiungo alla
+        # lista dei libri filtrati nella view
         if libri_filtrati:
             for el in libri_filtrati:
                 libro_in_testo=ft.Text(str(el))
                 self._view.lista_libri_filtrati.controls.append(libro_in_testo)
-        else:
+        else: # Se la lista è vuota
             self._view.show_alert("Nessun libro soddisfa i criteri di filtraggio")
 
         self._view.update()

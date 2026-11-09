@@ -14,6 +14,7 @@ class Model:
         self._libro_dao = LibroDAO()
 
     # --- LIBRI ---
+    # Funzione che prende dal dao la lista dei libri in base alla biblioteca e al genere selezionata
     def get_libri_filtrati(self, biblioteca:str, genere:str):
         """Restituisce la lista di tutti i libri filtrati per biblioteca e/o genere (filtri opzionali)."""
         dao=LibroDAO()
@@ -21,6 +22,7 @@ class Model:
 
         return libri_filtrati
 
+    # Funzione che prende dal dao la lista di tutti i libri, e poi crea una lista di tutti i generi presenti che ritorna
     def get_generi(self):
         """Restituisce la lista di tutti i generi."""
         print("Prendendo i generi ...")
@@ -35,6 +37,7 @@ class Model:
         return generi
 
     # --- BIBLIOTECHE ---
+    # Funzione che prende dal dao la lista di tutte le biblioteche e la ritorna
     def get_biblioteche(self):
         """ Restituisce la lista di tutte le biblioteche."""
         print("Prendendo le biblioteche ...")

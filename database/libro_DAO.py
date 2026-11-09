@@ -10,6 +10,7 @@ class LibroDAO:
     def __init__(self):
         pass
 
+    # Funzione che interroga il database facendosi dare tutti i libri e poi restituirne una lista
     def leggi_libri_dal_db(self):
 
         cnx = DBConnect.get_connection()
@@ -32,6 +33,12 @@ class LibroDAO:
 
             return libri
 
+        else:
+            return "Nessun database trovato"
+
+    # Funzione che interroga il database facendosi dare tutti quei libri che rispettano biblioteca e genere dati,
+    # gestendo anche l'opzione "Nessun filtro" che indica che il relativo filtro (nome della biblioteca o genere)
+    # non è attivo (COALESCE)
     def filtra_libri_dal_db(self, biblioteca, genere):
 
         cnx = DBConnect.get_connection()
@@ -56,6 +63,9 @@ class LibroDAO:
             cnx.close()
 
             return libri_filtrati
+
+        else:
+            return "Nessun database trovato"
 
 #AND l.genere = COALESCE(%s, l.genere) AND b.nome = COALESCE(%s, b.nome)
 #AND b.nome= '{biblioteca}' AND l.genere= '{genere}'

@@ -40,6 +40,7 @@ class View:
 
         # --- Sezione 2: Filtraggio ---
 
+        # Creo le dropdown e chiamo le funzioni che le popolano
         self.dd_biblioteche = ft.Dropdown(label="Biblioteca", on_select=self.controller.get_biblioteca)
         if self.controller is not None:
             self.controller.popola_dd_biblioteche()
@@ -50,6 +51,7 @@ class View:
 
 
         # Sezione 3: Libri
+        # Creo la lista e il pulsante per i libri filtrati
         self.lista_libri_filtrati=ft.ListView(expand=True, spacing=5, padding=10, auto_scroll=True)
         self.pulsante_mostra = ft.Button("Mostra Libri", on_click=self.controller.handler_filtro)
 

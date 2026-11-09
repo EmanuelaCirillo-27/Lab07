@@ -10,6 +10,7 @@ class BibliotecaDAO:
     def __init__(self):
         pass
 
+    # Funzione che interroga il database facendosi dare tutte le biblioteche e poi restituirne una lista
     def leggi_biblioteche_dal_db(self):
 
         #db=DBConnect()
@@ -36,5 +37,5 @@ class BibliotecaDAO:
             return biblioteche
 
         else:
-            return None
+            return "Nessun database trovato"
 
